@@ -17,22 +17,19 @@ public class BuildTool : MonoBehaviour, IToolable
     }
     public void UseTool()
     {
-        if (!BuildUI.activeSelf)
+        if (!BuildUI.activeSelf) //Check for UI
         {
-            Debug.Log("Is USED");
-            Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f)); // Create a ray from the center of the screen
-
+            Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
-                // An object was hit
                 Vector3 hitPoint = hit.point;
+                tempShape.GetComponent<Renderer>().material.color = Color.white;
+                tempShape.transform.parent = null;
+                int LayerDefault = LayerMask.NameToLayer("Default");
+                tempShape.layer = LayerDefault;
                 tempShape = null;
                 ShapeSelector(spawnShape);
-                
-                GameObject hitObject = hit.collider.gameObject;
-                Debug.Log("Object hit: " + hitObject.name);
-
             }
         }
 
@@ -41,20 +38,19 @@ public class BuildTool : MonoBehaviour, IToolable
     void Update()
     {
         UIToggle();
-        Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f)); // Create a ray from the center of the screen
-
+        TempCubePlacement();
+    }
+    private void TempCubePlacement()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f)); 
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit))
         {
-            // An object was hit
             Vector3 hitPoint = hit.point;
             tempShape.transform.position = hit.point;
             GameObject hitObject = hit.collider.gameObject;
         }
-
     }
-
-    
     private void UIToggle()
     {
         //Brings Up and Down Menu also disables the players Cursor movement and allows UI to Be Clicked
@@ -78,19 +74,21 @@ public class BuildTool : MonoBehaviour, IToolable
     }
     public void ShapeSelector(PrimitiveType shapeToSpawn)
     {
+        //Sets a temp shape that show where it is going to be placed 
         Destroy(tempShape);
         spawnShape = shapeToSpawn;
         tempShape = GameObject.CreatePrimitive(spawnShape);
-        
+        tempShape.transform.parent = transform;
+        //Cube Will build ontop of itself if has raycasts enabled
         int LayerIgnoreRaycast = LayerMask.NameToLayer("Ignore Raycast");
         tempShape.layer = LayerIgnoreRaycast;
 
         TransparentShape();
         
     }
-
     void TransparentShape()
     {
+        //Color to Transparent
         Material mat = tempShape.GetComponent<Renderer>().material;
         mat.color = Color.gray;
 
