@@ -53,27 +53,17 @@ public class ToolSelector : MonoBehaviour
     //Visuals
     private void ChangeTool()
     {
-        
-        if (toolIDNum == 0)
+        if (toolIDNum >= 0 && toolIDNum < playerTools.Length)
         {
             DisableTools();
-            playerTools[0].SetActive(true);
-        }
-        else if (toolIDNum == 1)
-        {
-            DisableTools();
-            playerTools[1].SetActive(true);
-        }
-        else if (toolIDNum == 2)
-        {
-            DisableTools();
-            playerTools[2].SetActive(true);
+            playerTools[toolIDNum].SetActive(true);
+            
         }
     }
 
     private void DisableTools()
     {
-        for (int i = 0; i < maxNumber +1 ; i++)
+        for (int i = 0; i < maxNumber + 1 ; i++)
         {
             playerTools[i].SetActive(false);
         }

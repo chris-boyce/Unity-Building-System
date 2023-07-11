@@ -12,7 +12,7 @@ public class BuildTool : MonoBehaviour, IToolable
     [SerializeField] private PrimitiveType spawnShape;
     private GameObject tempShape;
 
-    void Start()
+    void OnEnable()
     {
         ShapeSelector(PrimitiveType.Cube);
     }
@@ -105,6 +105,11 @@ public class BuildTool : MonoBehaviour, IToolable
         mat.EnableKeyword("_ALPHABLEND_ON");
         mat.DisableKeyword("_ALPHAPREMULTIPLY_ON");
         mat.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
+    }
+
+    void OnDisable()
+    {
+        Destroy(tempShape);
     }
     
 
