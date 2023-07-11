@@ -48,6 +48,12 @@ public class DestroyTool : MonoBehaviour, IToolable
             }
             savedObject = destroyObject;
         }
+
+        
+    }
+    public void UIToggle()
+    {
+
     }
 
 }

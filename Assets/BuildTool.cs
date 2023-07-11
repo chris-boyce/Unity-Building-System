@@ -7,7 +7,7 @@ using UnityEngine.Events;
 
 public class BuildTool : MonoBehaviour, IToolable
 {
-    [SerializeField] private GameObject BuildUI;
+    [SerializeField] private GameObject buildUI;
     private bool uiToggleInput;
     [SerializeField] private PrimitiveType spawnShape;
     private GameObject tempShape;
@@ -18,7 +18,7 @@ public class BuildTool : MonoBehaviour, IToolable
     }
     public void UseTool()
     {
-        if (!BuildUI.activeSelf) //Check for UI
+        if (!buildUI.activeSelf) //Check for UI
         {
             Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
             RaycastHit hit;
@@ -55,13 +55,13 @@ public class BuildTool : MonoBehaviour, IToolable
             GameObject hitObject = hit.collider.gameObject;
         }
     }
-    private void UIToggle()
+    public void UIToggle()
     {
         //Brings Up and Down Menu also disables the players Cursor movement and allows UI to Be Clicked
         uiToggleInput |= (Input.GetKey(KeyCode.Tab));
         if (uiToggleInput)
         {
-            BuildUI.SetActive(uiToggleInput);
+            buildUI.SetActive(uiToggleInput);
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = uiToggleInput;
             PlayerController.Instance.disableCursor = uiToggleInput;
@@ -69,7 +69,7 @@ public class BuildTool : MonoBehaviour, IToolable
         }
         else
         {
-            BuildUI.SetActive(uiToggleInput);
+            buildUI.SetActive(uiToggleInput);
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = uiToggleInput;
             PlayerController.Instance.disableCursor = uiToggleInput;

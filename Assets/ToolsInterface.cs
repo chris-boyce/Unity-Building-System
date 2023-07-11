@@ -5,5 +5,6 @@ using UnityEngine;
 public interface IToolable
 {
     void UseTool();
+    void UIToggle();
 }
 

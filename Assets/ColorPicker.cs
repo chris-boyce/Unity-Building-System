@@ -10,6 +10,8 @@ public class ColorPicker : MonoBehaviour
     [SerializeField] private RectTransform texture;
     [SerializeField] private GameObject SphereTest;
     [SerializeField] private Texture2D refSprite;
+
+    [SerializeField] private EditTool editTool;
     public Color PickedColor;
 
     public void OnClick()
@@ -27,5 +29,6 @@ public class ColorPicker : MonoBehaviour
         int localPosY = (int)(globalposY * (refSprite.height / texture.rect.height));
 
         PickedColor = refSprite.GetPixel(localPosX, localPosY);
+        editTool.selectedColor = PickedColor;
     }
 }
