@@ -45,7 +45,6 @@ public class ToolSelector : MonoBehaviour
         //Calls the Use Function on the Tools depending on the one in hand
         if (Input.GetMouseButtonDown(0))
         {
-            Debug.Log("ButtonPressed");
             Tools[toolIDNum].UseTool();
         }
 

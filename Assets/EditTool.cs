@@ -4,19 +4,23 @@ using UnityEngine;
 
 public class EditTool : MonoBehaviour, IToolable
 {
-    // Start is called before the first frame update
+    private bool uiToggleInput;
     void Start()
     {
-        
+        uiToggleInput = false;
     }
     public void UseTool()
     {
-        Debug.Log("EditToolIsUsed");
+        
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
-        
+        uiToggleInput |= (Input.GetKey(KeyCode.Tab));
+        if (uiToggleInput)
+        {
+
+        }
     }
 }

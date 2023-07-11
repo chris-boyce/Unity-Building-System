@@ -6,9 +6,12 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
+    public static PlayerController Instance { get; private set; }
     public Camera playerCamera;
     public float walkSpeed = 6f;
     public float runSpeed = 12f;
+
+    public bool disableCursor;
 
     public float sens = 2f;
     public float lookXLimit = 45f;
@@ -23,6 +26,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        Instance = this;
         characterController = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -51,9 +55,13 @@ public class PlayerController : MonoBehaviour
 
         characterController.Move(moveDirection * Time.deltaTime);
 
-        rotationX += -Input.GetAxis("Mouse Y") * sens;
-        rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
-        playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
-        transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * sens, 0);
+        if (!disableCursor)
+        {
+            rotationX += -Input.GetAxis("Mouse Y") * sens;
+            rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
+            playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
+            transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * sens, 0);
+        }
+        
     }
 }
