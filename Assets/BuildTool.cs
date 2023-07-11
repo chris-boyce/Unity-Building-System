@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations;
 using UnityEngine.Events;
 
 public class BuildTool : MonoBehaviour, IToolable
@@ -23,11 +24,13 @@ public class BuildTool : MonoBehaviour, IToolable
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
-                Vector3 hitPoint = hit.point;
+                
                 tempShape.GetComponent<Renderer>().material.color = Color.white;
                 tempShape.transform.parent = null;
+                tempShape.tag = "Destroyable";
                 int LayerDefault = LayerMask.NameToLayer("Default");
                 tempShape.layer = LayerDefault;
+                
                 tempShape = null;
                 ShapeSelector(spawnShape);
             }
@@ -46,8 +49,9 @@ public class BuildTool : MonoBehaviour, IToolable
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit))
         {
-            Vector3 hitPoint = hit.point;
-            tempShape.transform.position = hit.point;
+
+            Vector3 hitPoint = new Vector3(Mathf.Round(hit.point.x), Mathf.Round(hit.point.y + 1), MathF.Round(hit.point.z));
+            tempShape.transform.position = hitPoint;
             GameObject hitObject = hit.collider.gameObject;
         }
     }
@@ -78,11 +82,9 @@ public class BuildTool : MonoBehaviour, IToolable
         Destroy(tempShape);
         spawnShape = shapeToSpawn;
         tempShape = GameObject.CreatePrimitive(spawnShape);
-        tempShape.transform.parent = transform;
         //Cube Will build ontop of itself if has raycasts enabled
         int LayerIgnoreRaycast = LayerMask.NameToLayer("Ignore Raycast");
         tempShape.layer = LayerIgnoreRaycast;
-
         TransparentShape();
         
     }
