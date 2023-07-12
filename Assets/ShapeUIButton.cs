@@ -25,9 +25,15 @@ public class ShapeUIButton : MonoBehaviour
             case Enums.Shapes.Capsule:
                 buildTool.ShapeSelector(PrimitiveType.Capsule);
                 break;
-        }
+            case Enums.Shapes.Null:
+                break;
 
-        
+        }
+    }
+
+    public void ChangeModel(GameObject prefab)
+    {
+        buildTool.ModelSelector(prefab);
     }
 
     

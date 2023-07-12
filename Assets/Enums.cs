@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class Enums : MonoBehaviour
 {
-    public enum Shapes{Cube, Sphere, Capsule}
+    public enum Shapes{Cube, Sphere, Capsule, Null}
 }

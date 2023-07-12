@@ -11,6 +11,7 @@ public class BuildTool : MonoBehaviour, IToolable
     private bool uiToggleInput;
     [SerializeField] private PrimitiveType spawnShape;
     private GameObject tempShape;
+    public GameObject model;
 
     void OnEnable()
     {
@@ -24,13 +25,9 @@ public class BuildTool : MonoBehaviour, IToolable
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
-                
-                tempShape.GetComponent<Renderer>().material.color = Color.white;
-                tempShape.transform.parent = null;
-                tempShape.tag = "Destroyable";
-                int LayerDefault = LayerMask.NameToLayer("Default");
-                tempShape.layer = LayerDefault;
-                
+                tempShape.AddComponent<ObjectVisuals>().MakeObjectTransparent(1f);
+                tempShape.AddComponent<ObjectVisuals>().RaycastsEnabled();
+
                 tempShape = null;
                 ShapeSelector(spawnShape);
             }
@@ -49,8 +46,7 @@ public class BuildTool : MonoBehaviour, IToolable
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit))
         {
-
-            Vector3 hitPoint = new Vector3(Mathf.Round(hit.point.x), Mathf.Round(hit.point.y + 1), MathF.Round(hit.point.z));
+            Vector3 hitPoint = new Vector3(Mathf.Round(hit.point.x), Mathf.Round(hit.point.y + 0.5f), MathF.Round(hit.point.z));
             tempShape.transform.position = hitPoint;
             GameObject hitObject = hit.collider.gameObject;
         }
@@ -82,30 +78,18 @@ public class BuildTool : MonoBehaviour, IToolable
         Destroy(tempShape);
         spawnShape = shapeToSpawn;
         tempShape = GameObject.CreatePrimitive(spawnShape);
-        //Cube Will build ontop of itself if has raycasts enabled
-        int LayerIgnoreRaycast = LayerMask.NameToLayer("Ignore Raycast");
-        tempShape.layer = LayerIgnoreRaycast;
-        TransparentShape();
-        
+        tempShape.AddComponent<ObjectVisuals>().MakeObjectTransparent(0.5f);
+        tempShape.AddComponent<ObjectVisuals>().RaycastsDisabled();
     }
-    void TransparentShape()
+
+    public void ModelSelector(GameObject prefab)
     {
-        //Color to Transparent
-        Material mat = tempShape.GetComponent<Renderer>().material;
-        mat.color = Color.gray;
-
-        Color color = mat.color;
-        color.a = 0.5f;
-        mat.color = color;
-
-        mat.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
-        mat.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
-        mat.SetInt("_ZWrite", 0);
-        mat.DisableKeyword("_ALPHATEST_ON");
-        mat.EnableKeyword("_ALPHABLEND_ON");
-        mat.DisableKeyword("_ALPHAPREMULTIPLY_ON");
-        mat.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
+        Destroy(tempShape);
+        tempShape = Instantiate(prefab);
+        tempShape.AddComponent<ObjectVisuals>().MakeObjectTransparent(0.5f);
+        tempShape.AddComponent<ObjectVisuals>().RaycastsDisabled();
     }
+    
 
     void OnDisable()
     {
