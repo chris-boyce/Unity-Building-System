@@ -7,10 +7,11 @@ using UnityEngine;
 public class BuildTool : MonoBehaviour, IToolable
 {
     [SerializeField] private GameObject buildUI;
-    private bool uiToggleInput;
+    [SerializeField] private GameObject model;
     [SerializeField] private PrimitiveType spawnShape;
+
+    private bool uiToggleInput;
     private GameObject tempShape;
-    public GameObject model;
     private bool isPrimative;
 
     void OnEnable()
@@ -32,14 +33,9 @@ public class BuildTool : MonoBehaviour, IToolable
             tempShape = null;
 
             if (isPrimative)
-            {
                 ShapeSelector(spawnShape);
-            }
-            else
-            {
+            else  
                 ModelSelector(model);
-            }
-            
         }
     }
 

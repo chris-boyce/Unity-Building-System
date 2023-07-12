@@ -6,7 +6,6 @@ using TMPro;
 public class DestroyTool : MonoBehaviour, IToolable
 {
     [SerializeField] private GameObject savedObject;
-
     [SerializeField]private Color savedColor;
     void OnEnable()
     {

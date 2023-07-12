@@ -12,7 +12,7 @@ public class ColorPicker : MonoBehaviour
 
     [SerializeField] private EditTool editTool;
     [SerializeField] private Image buttonImage;
-    public Color PickedColor;
+    private Color PickedColor;
 
     public void OnClick()
     {
