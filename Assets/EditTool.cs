@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
 using static UnityEditor.ObjectChangeEventStream;
+using Color = UnityEngine.Color;
 
 public class EditTool : MonoBehaviour, IToolable
 {
@@ -10,9 +12,11 @@ public class EditTool : MonoBehaviour, IToolable
     private bool uiToggleInput;
     public Color selectedColor;
     public float rotationAmount;
+    public float emissionMultipler;
     void Start()
     {
         uiToggleInput = false;
+        
     }
     public void UseTool()
     {
@@ -34,6 +38,9 @@ public class EditTool : MonoBehaviour, IToolable
                 case Enums.EditFunctions.Rotation:
                     RotateObject(hit);
                     break;
+                case Enums.EditFunctions.Emmissions:
+                    AddEmmisions(hit);
+                    break;
 
             }
         }
@@ -41,18 +48,27 @@ public class EditTool : MonoBehaviour, IToolable
 
     public void RotateObject(RaycastHit hit)
     {
-        Debug.Log("Rotated");
-        hit.collider.gameObject.GetComponent<Transform>().Rotate(new Vector3(rotationAmount , 0, 0));
+        hit.collider.gameObject.GetComponent<Transform>().Rotate(new Vector3(0 , rotationAmount, 0));
     }
 
-    
+    public void AddEmmisions(RaycastHit hit)
+    {
+        hit.collider.gameObject.GetComponent<Renderer>().material.EnableKeyword("_EMISSION");
+        hit.collider.gameObject.GetComponent<Renderer>().material.SetColor("_EmissionColor", hit.collider.gameObject.GetComponent<Renderer>().material.color * emissionMultipler);
+    }
+
     void ColorChange(RaycastHit hit) 
     {
         hit.collider.gameObject.GetComponent<Renderer>().material.color = selectedColor;
     }
     public void RotationChange(float degrees)
     {
-        rotationAmount = Mathf.Round(degrees * 180);
+        rotationAmount = Mathf.Round(degrees);
+    }
+
+    public void EmissionIntensityChange(float strength)
+    {
+        emissionMultipler = Mathf.Round(strength);
     }
 
     void ToggleRB(RaycastHit hit) //Rb Tool Toggle (You cant disable RBs so have to destroy)
