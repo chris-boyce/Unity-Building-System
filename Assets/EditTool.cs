@@ -9,6 +9,7 @@ public class EditTool : MonoBehaviour, IToolable
     public Enums.EditFunctions job;
     private bool uiToggleInput;
     public Color selectedColor;
+    public float rotationAmount;
     void Start()
     {
         uiToggleInput = false;
@@ -30,15 +31,28 @@ public class EditTool : MonoBehaviour, IToolable
                 case Enums.EditFunctions.RigidbodyToggles:
                     ToggleRB(hit);
                     break;
+                case Enums.EditFunctions.Rotation:
+                    RotateObject(hit);
+                    break;
 
             }
         }
+    }
+
+    public void RotateObject(RaycastHit hit)
+    {
+        Debug.Log("Rotated");
+        hit.collider.gameObject.GetComponent<Transform>().Rotate(new Vector3(rotationAmount , 0, 0));
     }
 
     
     void ColorChange(RaycastHit hit) 
     {
         hit.collider.gameObject.GetComponent<Renderer>().material.color = selectedColor;
+    }
+    public void RotationChange(float degrees)
+    {
+        rotationAmount = Mathf.Round(degrees * 180);
     }
 
     void ToggleRB(RaycastHit hit) //Rb Tool Toggle (You cant disable RBs so have to destroy)

@@ -12,7 +12,7 @@ public class EditUIButton : MonoBehaviour
     {
         GetComponent<Button>().onClick.AddListener(ChangeJob);
     }
-
+    
 
     void ChangeJob()
     {
@@ -23,6 +23,9 @@ public class EditUIButton : MonoBehaviour
                 break;
             case Enums.EditFunctions.RigidbodyToggles:
                 EditTool.job = Enums.EditFunctions.RigidbodyToggles;
+                break;
+            case Enums.EditFunctions.Rotation:
+                EditTool.job = Enums.EditFunctions.Rotation;
                 break;
 
 
