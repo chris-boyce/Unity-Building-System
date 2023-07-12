@@ -12,6 +12,7 @@ public class ColorPicker : MonoBehaviour
     [SerializeField] private Texture2D refSprite;
 
     [SerializeField] private EditTool editTool;
+    [SerializeField] private Image buttonImage;
     public Color PickedColor;
 
     public void OnClick()
@@ -30,5 +31,6 @@ public class ColorPicker : MonoBehaviour
 
         PickedColor = refSprite.GetPixel(localPosX, localPosY);
         editTool.selectedColor = PickedColor;
+        buttonImage.color = PickedColor;
     }
 }

@@ -19,19 +19,20 @@ public class BuildTool : MonoBehaviour, IToolable
     }
     public void UseTool()
     {
-        if (!buildUI.activeSelf) //Check for UI
-        {
-            Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit))
-            {
-                tempShape.AddComponent<ObjectVisuals>().MakeObjectTransparent(1f);
-                tempShape.AddComponent<ObjectVisuals>().RaycastsEnabled();
+        if (buildUI.activeSelf) //Check for UI
+            return;
 
-                tempShape = null;
-                ShapeSelector(spawnShape);
-            }
+        Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit))
+        {
+            tempShape.GetComponent<ObjectVisuals>().MakeObjectTransparent(1f);
+            tempShape.GetComponent<ObjectVisuals>().RaycastsEnabled();
+
+            tempShape = null;
+            ShapeSelector(spawnShape);
         }
+
 
     }
 
@@ -46,7 +47,7 @@ public class BuildTool : MonoBehaviour, IToolable
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit))
         {
-            Vector3 hitPoint = new Vector3(Mathf.Round(hit.point.x), Mathf.Round(hit.point.y + 0.5f), MathF.Round(hit.point.z));
+            Vector3 hitPoint = new Vector3(Mathf.Round(hit.point.x + 0.5f), Mathf.Round(hit.point.y + 0.5f), MathF.Round(hit.point.z));
             tempShape.transform.position = hitPoint;
             GameObject hitObject = hit.collider.gameObject;
         }
@@ -79,7 +80,7 @@ public class BuildTool : MonoBehaviour, IToolable
         spawnShape = shapeToSpawn;
         tempShape = GameObject.CreatePrimitive(spawnShape);
         tempShape.AddComponent<ObjectVisuals>().MakeObjectTransparent(0.5f);
-        tempShape.AddComponent<ObjectVisuals>().RaycastsDisabled();
+        tempShape.GetComponent<ObjectVisuals>().RaycastsDisabled();
     }
 
     public void ModelSelector(GameObject prefab)
@@ -87,7 +88,7 @@ public class BuildTool : MonoBehaviour, IToolable
         Destroy(tempShape);
         tempShape = Instantiate(prefab);
         tempShape.AddComponent<ObjectVisuals>().MakeObjectTransparent(0.5f);
-        tempShape.AddComponent<ObjectVisuals>().RaycastsDisabled();
+        tempShape.GetComponent<ObjectVisuals>().RaycastsDisabled();
     }
     
 

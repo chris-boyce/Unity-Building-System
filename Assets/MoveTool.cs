@@ -10,7 +10,7 @@ public class MoveTool : MonoBehaviour, IToolable
     
     public void UseTool()
     {
-        if (!hasObject)
+        if (!hasObject) //First Press
         {
             Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
             RaycastHit hit;
@@ -22,7 +22,7 @@ public class MoveTool : MonoBehaviour, IToolable
                 hasObject = true;
             }
         }
-        else
+        else //Second Press
         {
             moveObject.GetComponent<ObjectVisuals>().RaycastsEnabled();
             moveObject.GetComponent<ObjectVisuals>().MakeObjectTransparent(1f);
@@ -33,17 +33,18 @@ public class MoveTool : MonoBehaviour, IToolable
 
     void Update()
     {
-        if (hasObject)
+        if (!hasObject)
+            return;
+
+        Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit))
         {
-            Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit))
-            {
-                    Vector3 hitPoint = new Vector3(Mathf.Round(hit.point.x), Mathf.Round(hit.point.y + 1),
-                    MathF.Round(hit.point.z));
-                    moveObject.transform.position = hitPoint;
-            }
+            Vector3 hitPoint = new Vector3(Mathf.Round(hit.point.x), Mathf.Round(hit.point.y + 1),
+                MathF.Round(hit.point.z));
+            moveObject.transform.position = hitPoint;
         }
+
     }
 
     void OnDisable()
