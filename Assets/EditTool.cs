@@ -10,6 +10,9 @@ public class EditTool : MonoBehaviour, IToolable
     [SerializeField] private GameObject editUI;
     public Enums.EditFunctions job;
     private bool uiToggleInput;
+
+    [SerializeField] private AudioClip sound_Edit;
+
     public Color selectedColor;
     public float rotationAmount;
     public float emissionMultipler;
@@ -51,6 +54,7 @@ public class EditTool : MonoBehaviour, IToolable
                     break;
 
             }
+            SoundManager.instance.PlaySoundEffect(sound_Edit);
         }
     }
     //Saves Local Variable To The Tool For When the Key Tool Is Used

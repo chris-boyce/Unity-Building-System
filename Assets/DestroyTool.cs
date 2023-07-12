@@ -7,6 +7,8 @@ public class DestroyTool : MonoBehaviour, IToolable
 {
     [SerializeField] private GameObject savedObject;
     [SerializeField]private Color savedColor;
+
+    [SerializeField] private AudioClip sound_Destroy;
     void OnEnable()
     {
         UIToggle();
@@ -18,6 +20,7 @@ public class DestroyTool : MonoBehaviour, IToolable
         if (Physics.Raycast(ray, out hit) && hit.transform.CompareTag("Editable"))
         {
             Destroy(hit.transform.gameObject);
+            SoundManager.instance.PlaySoundEffect(sound_Destroy);
         }
     }
 

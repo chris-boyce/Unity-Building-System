@@ -8,6 +8,7 @@ public class MoveTool : MonoBehaviour, IToolable
 {
     [SerializeField] private bool hasObject;
     [SerializeField] private GameObject moveObject;
+    [SerializeField] private AudioClip sound_Move;
 
     void OnEnable()
     {
@@ -26,6 +27,7 @@ public class MoveTool : MonoBehaviour, IToolable
                 moveObject.GetComponent<ObjectVisuals>().MakeObjectTransparent(0.5f);
                 moveObject.GetComponent<ObjectVisuals>().ToggleColliders();
                 hasObject = true;
+                SoundManager.instance?.PlaySoundEffect(sound_Move);
             }
         }
         else //Second Press
@@ -34,6 +36,7 @@ public class MoveTool : MonoBehaviour, IToolable
             moveObject.GetComponent<ObjectVisuals>().MakeObjectTransparent(1f);
             moveObject.GetComponent<ObjectVisuals>().ToggleColliders();
             hasObject = false;
+            SoundManager.instance?.PlaySoundEffect(sound_Move);
         }
         
     }

@@ -9,6 +9,8 @@ public class BuildTool : MonoBehaviour, IToolable
     [SerializeField] private GameObject buildUI;
     [SerializeField] private GameObject model;
     [SerializeField] private PrimitiveType spawnShape;
+    [SerializeField] private AudioClip sound_Place;
+    
 
     private bool uiToggleInput;
     private GameObject tempShape;
@@ -31,6 +33,8 @@ public class BuildTool : MonoBehaviour, IToolable
             tempShape.GetComponent<ObjectVisuals>().RaycastsEnabled();
 
             tempShape = null;
+
+            SoundManager.instance.PlaySoundEffect(sound_Place);
 
             if (isPrimative)
                 ShapeSelector(spawnShape);
@@ -66,6 +70,7 @@ public class BuildTool : MonoBehaviour, IToolable
             Cursor.visible = uiToggleInput;
             PlayerController.Instance.disableCursor = uiToggleInput;
             
+
         }
         else
         {
@@ -74,6 +79,7 @@ public class BuildTool : MonoBehaviour, IToolable
             Cursor.visible = uiToggleInput;
             PlayerController.Instance.disableCursor = uiToggleInput;
         }
+        
         uiToggleInput = false;
     }
     public void ShapeSelector(PrimitiveType shapeToSpawn)

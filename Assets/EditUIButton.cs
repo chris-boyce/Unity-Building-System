@@ -10,9 +10,16 @@ public class EditUIButton : MonoBehaviour
     [SerializeField] private Enums.EditFunctions Jobs;
     [SerializeField] private EditTool EditTool;
     [SerializeField] private TMP_Text degreeText;
+    [SerializeField] private AudioClip sound_UIClick;
     void Start()
     {
         GetComponent<Button>().onClick.AddListener(ChangeJob);
+    }
+
+    void OnEnable()
+    {
+        if(sound_UIClick != null)
+            SoundManager.instance?.PlaySoundEffect(sound_UIClick);
     }
     
     void ChangeJob()
