@@ -8,7 +8,6 @@ using UnityEngine.UI;
 public class ColorPicker : MonoBehaviour
 {
     [SerializeField] private RectTransform texture;
-    [SerializeField] private GameObject SphereTest;
     [SerializeField] private Texture2D refSprite;
 
     [SerializeField] private EditTool editTool;

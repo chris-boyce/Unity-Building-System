@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using UnityEngine;
-using static UnityEditor.ObjectChangeEventStream;
+using TMPro;
 using Color = UnityEngine.Color;
 
 public class EditTool : MonoBehaviour, IToolable
@@ -13,10 +13,11 @@ public class EditTool : MonoBehaviour, IToolable
     public Color selectedColor;
     public float rotationAmount;
     public float emissionMultipler;
+    public float transparentMultipler;
+    public float scaleMultipler;
     void Start()
     {
         uiToggleInput = false;
-        
     }
     public void UseTool()
     {
@@ -27,40 +28,35 @@ public class EditTool : MonoBehaviour, IToolable
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit) && hit.transform.CompareTag("Editable"))
         {
+            ObjectVisuals objVisuals = hit.collider.gameObject.GetComponent<ObjectVisuals>();
             switch (job)
             {
                 case Enums.EditFunctions.Color:
-                    ColorChange(hit);
+                    objVisuals.ColorChange(selectedColor);
                     break;
                 case Enums.EditFunctions.RigidbodyToggles:
-                    ToggleRB(hit);
+                    objVisuals.ToggleRB();
                     break;
                 case Enums.EditFunctions.Rotation:
-                    RotateObject(hit);
+                    objVisuals.RotateObject(rotationAmount);
                     break;
                 case Enums.EditFunctions.Emmissions:
-                    AddEmmisions(hit);
+                    objVisuals.AddEmissions(emissionMultipler);
+                    break;
+                case Enums.EditFunctions.Transparent:
+                    objVisuals.MakeObjectTransparent(transparentMultipler);
+                    break;
+                case Enums.EditFunctions.Scale:
+                    objVisuals.ScaleObject(scaleMultipler);
                     break;
 
             }
         }
     }
+    //Saves Local Variable To The Tool For When the Key Tool Is Used
 
-    public void RotateObject(RaycastHit hit)
-    {
-        hit.collider.gameObject.GetComponent<Transform>().Rotate(new Vector3(0 , rotationAmount, 0));
-    }
+    #region LocalVariableFunctions
 
-    public void AddEmmisions(RaycastHit hit)
-    {
-        hit.collider.gameObject.GetComponent<Renderer>().material.EnableKeyword("_EMISSION");
-        hit.collider.gameObject.GetComponent<Renderer>().material.SetColor("_EmissionColor", hit.collider.gameObject.GetComponent<Renderer>().material.color * emissionMultipler);
-    }
-
-    void ColorChange(RaycastHit hit) 
-    {
-        hit.collider.gameObject.GetComponent<Renderer>().material.color = selectedColor;
-    }
     public void RotationChange(float degrees)
     {
         rotationAmount = Mathf.Round(degrees);
@@ -71,18 +67,16 @@ public class EditTool : MonoBehaviour, IToolable
         emissionMultipler = Mathf.Round(strength);
     }
 
-    void ToggleRB(RaycastHit hit) //Rb Tool Toggle (You cant disable RBs so have to destroy)
+    public void TransparentChange(float strength)
     {
-        if (hit.collider.gameObject.GetComponent<Rigidbody>() == null)
-        {
-            hit.collider.gameObject.AddComponent<Rigidbody>();
-        }
-        else
-        {
-            Destroy(hit.collider.gameObject.GetComponent<Rigidbody>());
-        }
-        
+        transparentMultipler = strength;
     }
+
+    public void ScaleChange(float scale)
+    {
+        scaleMultipler = scale;
+    }
+    # endregion LocalVariableFunctions
 
     void Update()
     {
@@ -91,6 +85,7 @@ public class EditTool : MonoBehaviour, IToolable
 
     public void UIToggle()
     {
+        GameObject.FindGameObjectWithTag("UIText").GetComponent<TMP_Text>().text = "Edit Tool";
         uiToggleInput |= (Input.GetKey(KeyCode.Tab));
         if (uiToggleInput)
         {

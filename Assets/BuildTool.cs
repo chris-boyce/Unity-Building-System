@@ -1,9 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
-using UnityEngine.Animations;
-using UnityEngine.Events;
 
 public class BuildTool : MonoBehaviour, IToolable
 {
@@ -12,6 +11,7 @@ public class BuildTool : MonoBehaviour, IToolable
     [SerializeField] private PrimitiveType spawnShape;
     private GameObject tempShape;
     public GameObject model;
+    private bool isPrimative;
 
     void OnEnable()
     {
@@ -30,10 +30,17 @@ public class BuildTool : MonoBehaviour, IToolable
             tempShape.GetComponent<ObjectVisuals>().RaycastsEnabled();
 
             tempShape = null;
-            ShapeSelector(spawnShape);
+
+            if (isPrimative)
+            {
+                ShapeSelector(spawnShape);
+            }
+            else
+            {
+                ModelSelector(model);
+            }
+            
         }
-
-
     }
 
     void Update()
@@ -49,11 +56,11 @@ public class BuildTool : MonoBehaviour, IToolable
         {
             Vector3 hitPoint = new Vector3(Mathf.Round(hit.point.x + 0.5f), Mathf.Round(hit.point.y + 0.5f), MathF.Round(hit.point.z));
             tempShape.transform.position = hitPoint;
-            GameObject hitObject = hit.collider.gameObject;
         }
     }
     public void UIToggle()
     {
+        GameObject.FindGameObjectWithTag("UIText").GetComponent<TMP_Text>().text = "Build Tool";
         //Brings Up and Down Menu also disables the players Cursor movement and allows UI to Be Clicked
         uiToggleInput |= (Input.GetKey(KeyCode.Tab));
         if (uiToggleInput)
@@ -79,19 +86,26 @@ public class BuildTool : MonoBehaviour, IToolable
         Destroy(tempShape);
         spawnShape = shapeToSpawn;
         tempShape = GameObject.CreatePrimitive(spawnShape);
-        tempShape.AddComponent<ObjectVisuals>().MakeObjectTransparent(0.5f);
-        tempShape.GetComponent<ObjectVisuals>().RaycastsDisabled();
+        TempShapeInit(tempShape);
+        isPrimative = true;
     }
 
     public void ModelSelector(GameObject prefab)
     {
         Destroy(tempShape);
+        model = prefab;
         tempShape = Instantiate(prefab);
-        tempShape.AddComponent<ObjectVisuals>().MakeObjectTransparent(0.5f);
-        tempShape.GetComponent<ObjectVisuals>().RaycastsDisabled();
+        TempShapeInit(tempShape);
+        isPrimative = false;
+        
+    }
+
+    void TempShapeInit(GameObject GO)
+    {
+        GO.AddComponent<ObjectVisuals>().MakeObjectTransparent(0.5f);
+        GO.GetComponent<ObjectVisuals>().RaycastsDisabled();
     }
     
-
     void OnDisable()
     {
         Destroy(tempShape);

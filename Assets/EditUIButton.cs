@@ -7,15 +7,14 @@ using TMPro;
 
 public class EditUIButton : MonoBehaviour
 {
-    public Enums.EditFunctions Jobs;
-    public EditTool EditTool;
+    [SerializeField] private Enums.EditFunctions Jobs;
+    [SerializeField] private EditTool EditTool;
     [SerializeField] private TMP_Text degreeText;
     void Start()
     {
         GetComponent<Button>().onClick.AddListener(ChangeJob);
     }
     
-
     void ChangeJob()
     {
         switch (Jobs)
@@ -32,8 +31,12 @@ public class EditUIButton : MonoBehaviour
             case Enums.EditFunctions.Emmissions:
                 EditTool.job = Enums.EditFunctions.Emmissions;
                 break;
-
-
+            case Enums.EditFunctions.Transparent:
+                EditTool.job = Enums.EditFunctions.Transparent;
+                break;
+            case Enums.EditFunctions.Scale:
+                EditTool.job = Enums.EditFunctions.Scale;
+                break;
         }
     }
 

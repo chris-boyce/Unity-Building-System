@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ShapeUIButton : MonoBehaviour
 {
-    public Enums.Shapes Shape;
-    public BuildTool buildTool;
+    [SerializeField] private Enums.Shapes Shape;
+    [SerializeField] private BuildTool buildTool;
     void Start()
     {
         GetComponent<Button>().onClick.AddListener(ChangeShape);
@@ -34,6 +35,8 @@ public class ShapeUIButton : MonoBehaviour
     public void ChangeModel(GameObject prefab)
     {
         buildTool.ModelSelector(prefab);
+        Shape = Enums.Shapes.Null;
+        
     }
 
     

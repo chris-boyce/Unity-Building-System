@@ -1,14 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.ObjectChangeEventStream;
+using TMPro;
 
 public class DestroyTool : MonoBehaviour, IToolable
 {
     [SerializeField] private GameObject savedObject;
 
     [SerializeField]private Color savedColor;
-
+    void OnEnable()
+    {
+        UIToggle();
+    }
     public void UseTool()
     {
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
@@ -17,10 +20,14 @@ public class DestroyTool : MonoBehaviour, IToolable
         {
             Destroy(hit.transform.gameObject);
         }
-        
     }
 
     void Update()
+    {
+        DestroyRaycast();
+    }
+
+    void DestroyRaycast()
     {
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
         RaycastHit hit;
@@ -33,14 +40,12 @@ public class DestroyTool : MonoBehaviour, IToolable
                 savedObject.GetComponent<ObjectVisuals>().MakeObjectTransparent(1f);  //the color from this frame is applied
             }
             savedObject = destroyObject;
-            
-        }
 
-        
+        }
     }
     public void UIToggle()
     {
-
+        GameObject.FindGameObjectWithTag("UIText").GetComponent<TMP_Text>().text = "Destroy Tool";
     }
 
     void OnDisable()

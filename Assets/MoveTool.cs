@@ -2,12 +2,17 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class MoveTool : MonoBehaviour, IToolable
 {
-    [SerializeField]private bool hasObject;
+    [SerializeField] private bool hasObject;
     [SerializeField] private GameObject moveObject;
-    
+
+    void OnEnable()
+    {
+        UIToggle();
+    }
     public void UseTool()
     {
         if (!hasObject) //First Press
@@ -19,6 +24,7 @@ public class MoveTool : MonoBehaviour, IToolable
                 moveObject = hit.transform.gameObject;
                 moveObject.GetComponent<ObjectVisuals>().RaycastsDisabled();
                 moveObject.GetComponent<ObjectVisuals>().MakeObjectTransparent(0.5f);
+                moveObject.GetComponent<ObjectVisuals>().ToggleColliders();
                 hasObject = true;
             }
         }
@@ -26,6 +32,7 @@ public class MoveTool : MonoBehaviour, IToolable
         {
             moveObject.GetComponent<ObjectVisuals>().RaycastsEnabled();
             moveObject.GetComponent<ObjectVisuals>().MakeObjectTransparent(1f);
+            moveObject.GetComponent<ObjectVisuals>().ToggleColliders();
             hasObject = false;
         }
         
@@ -54,13 +61,10 @@ public class MoveTool : MonoBehaviour, IToolable
             moveObject.GetComponent<ObjectVisuals>().RaycastsEnabled();
             hasObject = false;
         }
-        
     }
-
-
 
     public void UIToggle()
     {
-
+        GameObject.FindGameObjectWithTag("UIText").GetComponent<TMP_Text>().text = "Move Tool";
     }
 }
