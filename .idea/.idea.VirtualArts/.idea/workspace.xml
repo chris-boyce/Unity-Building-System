@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="ff1752a1-2519-4bd8-a583-c95d29941978" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/Assets/BuildTool.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BuildTool.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ButtonPress.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ButtonPress.wav.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ColorPicker.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ColorPicker.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Destroy.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Destroy.wav.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DestroyTool.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DestroyTool.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Edit.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Edit.wav.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EditTool.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EditTool.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EditUIButton.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EditUIButton.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Enums.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Enums.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Move.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Move.wav.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/MoveTool.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/MoveTool.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ObjectVisuals.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ObjectVisuals.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Place.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Place.wav.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ShapeUIButton.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ShapeUIButton.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SoundManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SoundManager.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ToolsInterface.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ToolsInterface.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UIClick.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UIClick.wav.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ProjectId" id="2bSsOjGnQTBN5Kq4jFWnd4Nye8H" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
+    <configuration name="UnitTests (batch mode)" type="RunUnityExe" factoryName="Unity Executable">
+      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2022.1.14f1\Editor\Unity.exe" />
+      <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath D:\Uploads\VirtualArtsGame -testResults Logs/results.xml -testPlatform EditMode -debugCodeOptimization" />
+      <option name="WORKING_DIRECTORY" value="D:\Uploads\VirtualArtsGame" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+      <option name="allowRunningInParallel" value="false" />
+      <option name="listenPortForConnections" value="false" />
+      <option name="pid" />
+      <option name="projectPathOnTarget" />
+      <option name="selectedOptions">
+        <list />
+      </option>
+      <method v="2" />
+    </configuration>
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+      <option name="allowRunningInParallel" value="false" />
+      <option name="listenPortForConnections" value="false" />
+      <option name="pid" />
+      <option name="projectPathOnTarget" />
+      <option name="selectedOptions">
+        <list />
+      </option>
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ff1752a1-2519-4bd8-a583-c95d29941978" name="Changes" comment="" />
+      <created>1706219786219</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1706219786219</updated>
+      <workItem from="1706219794258" duration="35000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
+  <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+</project>
